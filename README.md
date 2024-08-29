@@ -76,3 +76,41 @@ I have also deployed this app on Streamlit Cloud, making it easy to access witho
 
 [chart-interpreter](https://b2fpnouqndyr3jwpzzwvig.streamlit.app/)
 
+## Project Structure and Technology Stack
+
+### Project Structure
+
+The project is organized as follows:
+
+```markdown
+chart-interpreter/
+├── app.py                    # Main Streamlit app script
+├── requirements.txt          # Python dependencies
+├── .env                      # Environment variables (not included in version control)
+├── .streamlit/
+│   └── secrets.toml          # Streamlit secrets management for API keys
+└── README.md                 # Project overview and instructions
+```
+
+### Technology Stack
+
+This project utilizes the following technologies:
+
+- **Python 3.7+**: The programming language used for the backend logic and data processing.
+- **Streamlit**: A Python library used for creating the web interface. 
+- **PIL (Python Imaging Library)**: Used for image processing tasks, such as opening and manipulating images uploaded by the user.
+- **OpenAI API**: The core API used to interpret the chart images. The OpenAI model processes the image data and provides a detailed analysis and interpretation.
+- **.env**: Used for managing environment variables, such as API keys, in a secure way.
+- **Requests**: A Python library used for sending HTTP requests to the OpenAI API.
+
+### How Image Interpretation Works
+
+The image interpretation process in this project works as follows:
+
+1. **Image Upload**: The user uploads an image of a chart via the Streamlit interface.
+2. **Image Processing**: The uploaded image is processed using the Python Imaging Library (PIL). The image is converted into a format suitable for API transmission, such as base64 encoding.
+3. **API Request**: The processed image is sent to the OpenAI API along with a prompt that asks the API to interpret the chart. This request includes the image data and specific instructions on how to analyze it.
+4. **AI Interpretation**: OpenAI's model analyzes the image, understanding the visual elements like bars, lines, and labels, and provides a human-readable interpretation of the chart's contents.
+5. **Result Display**: The interpretation returned by the OpenAI API is displayed in the Streamlit app, providing insights to the user about the chart's data and trends.
+
+
