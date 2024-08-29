@@ -50,7 +50,7 @@ def interpret_chart(image_bytes):
                 ]
             }
         ],
-        "max_tokens": 300
+        "max_tokens": 1024
     }
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
     return response.json()
@@ -75,11 +75,12 @@ def main():
                     interpretation = interpret_chart(img_bytes)
                     if 'choices' in interpretation:
                         message_content = interpretation['choices'][0]['message']['content']
+                        st.download_button(label="Download Interpretation", data=message_content, file_name="interpretation.txt", mime="text/plain")
                         st.markdown(
                             f"""
-                            <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+                            <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; word-wrap: break-word;">
                                 <h4>Chart Interpretation:</h4>
-                                <p>{message_content}</p>
+                                <p style="white-space: pre-wrap;">{message_content}</p>
                             </div>
                             """, unsafe_allow_html=True)
                     else:
